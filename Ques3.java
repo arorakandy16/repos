@@ -26,7 +26,7 @@ public class Ques3 {
 
 
     public static void main(String[] args) {
-        String str1 = "Ayush agrawal";
+        String str1 = "Kandy Arora";
         String[] arr = str1.split("");
         int a=0;
         Occurance(str1.split(""),arr.length-1,a);
