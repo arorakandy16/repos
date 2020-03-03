@@ -1,0 +1,95 @@
+plugins {
+    id 'java'
+}
+
+//sourceSets {
+//    main {
+//        java.srcDirs = ['src']
+//    }
+//}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+//dependencies {
+//    testCompile group: 'junit', name: 'junit', version: '4.12'
+//    //Ques1 Add a gradle dependency and its related repository url.
+//    compile group:'commons-io',name:'commons-io',version:'2.6'
+//    //--------------------------------------------------------------
+//
+//}
+
+// Question 2 Change in manifest file and make the jar executable
+
+//jar {
+//    manifest{
+//        attributes 'Main-Class': 'Question2'
+//    }
+//}
+
+//Ques 3 Differentiate between the different dependency scopes:
+// compile, runtime, testCompile, testRuntime
+// using different dependencies being defined in your build.gradle.
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group:'commons-io',name:'commons-io',version:'2.6'
+    testRuntime 'org.apache.httpcomponents:httpclient:4.5.7'
+    runtime 'org.apache.commons:commons-lang3:3.5'
+}
+
+
+//Ques 4 Create a custom plugin which contains a custom task which prints the current date-time.
+// Using that plugin in your project, execute that task after the jar task executes.
+
+class DatePlugin implements Plugin<Project> {
+    @Override
+    void apply(Project project) {
+        project.task('DateTask') {
+            dependsOn('build')
+            doLast {
+                println("My date is : " + new Date());
+            }
+        }
+    }
+}
+apply plugin:DatePlugin;
+
+
+//Ques 5 Instead of using default source set, use src/main/javaCode1, src/main/javaCode2 to be taken as code source.
+// Make sure that the JAR created contains files from both the directories and not from src/main/java.
+
+//sourceSets {
+//    main {
+//        java.srcDirs = ['src/main/javaCode1','src/main/javaCode2']
+//    }
+//}
+//
+//jar {
+//    manifest{
+//        attributes 'Main-Class': 'main/javaCode1/Hii'
+//        attributes 'Main-Class': 'main/javaCode2/Hii'
+//    }
+//}
+
+
+//Ques 6 Override the Gradle Wrapper task to install a different version of gradle.
+// Make sure that the task written in Q4 also executes with it.
+//Ans
+// Implement For checking the version of gradle wrapper
+//./gradlew -version
+//
+//For install the gradle wrapper
+//gradle wrapper --gradle-version 4.5
+//
+//For executing task
+//./gradlew DateTask
+//First GradleWrapper Version in my project is 4.5 and executing the task in Q4.
+
+
+//Ques 7 Run the gradle profile command and attach the resulting files.
