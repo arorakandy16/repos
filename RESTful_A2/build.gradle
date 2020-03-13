@@ -1,0 +1,52 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.5.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+}
+
+group = 'com.tothenew'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	//---------------------------------------------------------------------------------------------------------
+
+	//Ques 3................................................
+
+	compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+
+	//Ques10 Configure actuator in your project to check the health of application
+	//compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
+
+	//Question 5 Configure swagger plugin and create document of following methods
+
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+
+	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+
+	//----------------------------------------------------------------------------------------------------------
+
+	//compile group: 'org.springframework.boot', name: 'spring-boot-starter-hateoas'
+
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
